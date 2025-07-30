@@ -66,9 +66,9 @@ pipeline {
 		failure {
 			script {
 				mail to: EMAIL_TO,
-					from: EMAIL_FROM
+					from: EMAIL_FROM,
 					subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-					body: "The build failed. Please check the Jenkins console output for more details.",
+					body: "The build failed. Please check the Jenkins console output for more details."
 			}
 		}
 	}
