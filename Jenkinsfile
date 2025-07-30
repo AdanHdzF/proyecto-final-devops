@@ -24,7 +24,7 @@ pipeline {
 		stage('Test') {
 			steps {
 				script {
-					docker.build(IMAGE_NAME_TEST, '--f=Dockerfile.test .')
+					docker.build(IMAGE_NAME_TEST, '-f=Dockerfile.test .')
 				}
 			}
 		}
