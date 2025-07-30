@@ -2,7 +2,7 @@ pipeline {
 	agent any
 
 	environment {
-		PATH = "${env.PATH}:/usr/local/bin"
+		// KUBECONFIG = 'C:\Program Files\Jenkins'
 		IMAGE_NAME = 'proyectofinal'
 		IMAGE_NAME_TEST = 'proyectofinaltesting'
 		DOCKER_USERNAME = 'adanhf'
