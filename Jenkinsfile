@@ -2,7 +2,7 @@ pipeline {
 	agent any
 
 	environment {
-		// KUBECONFIG = 'C:\Program Files\Jenkins'
+		KUBECONFIG = 'C:\\Program Files\\Jenkins\\kubeconfig.yaml'
 		IMAGE_NAME = 'proyectofinal'
 		IMAGE_NAME_TEST = 'proyectofinaltesting'
 		DOCKER_USERNAME = 'adanhf'
