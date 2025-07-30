@@ -8,6 +8,8 @@ pipeline {
 		DOCKER_USERNAME = 'adanhf'
 		DOCKER_CREDENTIALS = 'docker-hub-credentials'
 		DOCKER_IMAGE = "${DOCKER_USERNAME}/${IMAGE_NAME}"
+		EMAIL_FROM = 'adan.hdz.f@gmail.com'
+		EMAIL_TO = 'adan.hdz.f@gmail.com'
 	}
 
 	triggers {
@@ -59,5 +61,14 @@ pipeline {
 				}
 			}
 		}
-	}	
+	}
+	post {
+		failure {
+			mail to: EMAIL_TO,
+				from: EMAIL_FROM
+				subject: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+				body: "The build failed. Please check the Jenkins console output for more details.",
+				
+		}
+	}
 }
