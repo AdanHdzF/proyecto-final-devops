@@ -15,7 +15,7 @@ pipeline {
 		stage('Test') {
 			steps {
 				script {
-					docker.build('proyectofinal:test', '--f Dockerfile.test .')
+					docker.build('proyectofinal:test', '-f Dockerfile.test .')
 				}
 			}
 		}
