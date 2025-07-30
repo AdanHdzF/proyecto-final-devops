@@ -1,6 +1,15 @@
 pipeline {
 	agent any
 
+	environment {
+		PATH = "${env.PATH}:/usr/local/bin"
+		IMAGE_NAME = 'proyectofinal'
+		IMAGE_NAME_TEST = 'proyectofinaltesting'
+		DOCKER_USERNAME = 'adanhf'
+		DOCKER_CREDENTIALS = 'docker-hub-credentials'
+		DOCKER_IMAGE = "${DOCKER_USERNAME}/${IMAGE_NAME}"
+	}
+
 	triggers {
 		githubPush()
 	}
@@ -15,7 +24,7 @@ pipeline {
 		stage('Test') {
 			steps {
 				script {
-					docker.build('proyectofinal:test', '-f Dockerfile.test .')
+					docker.build(IMAGE_NAME_TEST, '--f=Dockerfile.test .')
 				}
 			}
 		}
@@ -23,7 +32,7 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				script {
-					sh 'docker run -d --name proyectofinal_container proyectofinal:latest'
+					docker.build(DOCKER_IMAGE, '.')
 				}
 			}
 		}
