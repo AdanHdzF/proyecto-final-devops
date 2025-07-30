@@ -4,9 +4,10 @@ metadata:
     name: proyectofinal-service
     namespace: proyectofinal-namespace
 spec:
+    type: NodePort
     selector:
         app: proyectofinal-deployment
     ports:
-        - protocol: TCP
+        - nodePort: 30000
           port: 7000
           targetPort: 7000
