@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: proyectofinal-deployment
+    namespace: proyectofinal-namespace
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: proyectofinal-deployment
+    template:
+        metadata:
+            labels:
+                app: proyectofinal-deployment
+        spec:
+            containers:
+                - name: proyectofinal-container
+                  image: adanhf/proyectofinal
+                  ports:
+                      - containerPort: 7000

@@ -29,10 +29,32 @@ pipeline {
 			}
 		}
 
+		stage('Build') {
+			steps {
+				script {
+					image = docker.build(DOCKER_IMAGE, '.')
+				}
+			}
+		}
+
+		stage('Push') {
+			steps {
+				withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+					script {
+						docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
+							image.push()
+						}
+					}
+				}
+			}
+		}
+
 		stage('Deploy') {
 			steps {
 				script {
-					docker.build(DOCKER_IMAGE, '.')
+					bat 'kubectl apply -f k8s/namespace.yaml'
+					bat 'kubectl apply -f k8s/deployment.yaml'
+					bat 'kubectl apply -f k8s/service.yaml'
 				}
 			}
 		}
